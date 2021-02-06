@@ -41,7 +41,7 @@ class SearchActivity : BaseActivity() {
         viewModel.readNewsFromDB()
         layoutManager = LinearLayoutManager(this)
         content.layoutManager = layoutManager
-        supportActionBar?.title = getString(R.string.bookmark_toolbar_title)
+        supportActionBar?.title = getString(R.string.search)
         observeLiveData()
     }
 
