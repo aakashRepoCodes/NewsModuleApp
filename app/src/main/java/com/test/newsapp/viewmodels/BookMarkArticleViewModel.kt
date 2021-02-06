@@ -1,6 +1,8 @@
 package com.test.newsapp.viewmodels
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +33,19 @@ class BookMarkArticleViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     _bookmarkArticlesLiveData.value = it
+                }, {
+                    Log.e("value inserted", "article.title")
+                })
+        )
+    }
+
+    fun removeBookMarkArticle(articleId : Long) {
+        compositeDisposable.add(
+            databaseService.getArticleDao().saveOrRemoveBookmarkArticle(false , articleId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    getBookMarkedArticles()
                 }, {
                     Log.e("value inserted", "article.title")
                 })

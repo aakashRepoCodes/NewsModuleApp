@@ -18,8 +18,8 @@ interface ArticleDao {
     @Delete
     fun deleteNewsArticle(article: Article)
 
-    @Query("UPDATE article SET bookmark = :isArticleBookMarked WHERE id =:articleTitle")
-    fun saveOrRemoveBookmarkArticle(isArticleBookMarked: Boolean, articleTitle : Long) : Single<Int>
+    @Query("UPDATE article SET bookmark = :isArticleBookMarked WHERE id =:articleId")
+    fun saveOrRemoveBookmarkArticle(isArticleBookMarked: Boolean, articleId : Long) : Single<Int>
 
     @Query("SELECT * FROM article WHERE title =:query")
     fun searchArticle(query : String) : Single<List<Article>>

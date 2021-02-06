@@ -31,11 +31,15 @@ class BookmarkAdapter(private val items: List<Article>, context :Context ) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindData(items[position])
+        holder.newsBookMark.setOnClickListener {
+            (context as BookmarkActivity).viewModel.removeBookMarkArticle(items[position].id)
+        }
     }
 
     class ViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
 
         lateinit var newsImage: ImageView
+        lateinit var newsBookMark: ImageView
         lateinit var newsChannel: TextView
         lateinit var newsDesc: TextView
         lateinit var newsTitle: TextView
@@ -45,6 +49,7 @@ class BookmarkAdapter(private val items: List<Article>, context :Context ) :
             newsChannel=  itemView.findViewById(R.id.news_channel)
             newsDesc=  itemView.findViewById(R.id.news_desc)
             newsTitle= itemView.findViewById(R.id.news_title)
+            newsBookMark= itemView.findViewById(R.id.news_bookmark)
         }
 
         fun bindData(item: Article) {
