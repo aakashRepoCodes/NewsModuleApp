@@ -15,11 +15,12 @@ import com.test.newsapp.data.model.Article
 import com.test.newsapp.database.DatabaseService
 import com.test.newsapp.di.component.DaggerActivityComponent
 import com.test.newsapp.di.module.ActivityModule
-import com.test.newsapp.ui.adapter.Adapter
-import com.test.newsapp.ui.adapter.Adapter.OnItemClickListener
+import com.test.newsapp.ui.adapter.NewsAdapter
+import com.test.newsapp.ui.adapter.NewsAdapter.OnItemClickListener
 import com.test.newsapp.ui.base.BaseActivity
 import com.test.newsapp.ui.bookmark.BookmarkActivity
 import com.test.newsapp.ui.detail.NewsDetailActivity
+import com.test.newsapp.ui.search.SearchActivity
 import com.test.newsapp.viewmodels.NewsViewModel
 import com.test.pokemongo.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,7 +33,7 @@ class NewsHomeActivity : BaseActivity() {
     @Inject
     lateinit var viewModel: NewsViewModel
 
-    private lateinit var adapter: Adapter
+    private lateinit var newsAdapter: NewsAdapter
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var articles: List<Article> = ArrayList()
 
@@ -72,11 +73,11 @@ class NewsHomeActivity : BaseActivity() {
 
         viewModel.newsLiveData.observe(this, androidx.lifecycle.Observer {
             articles = it!!
-            adapter = Adapter(it!!, this@NewsHomeActivity)
-            recyclerView.adapter = adapter
-            adapter.notifyDataSetChanged()
+            newsAdapter = NewsAdapter(it!!, this@NewsHomeActivity)
+            recyclerView.adapter = newsAdapter
+            newsAdapter.notifyDataSetChanged()
 
-            adapter.setOnItemClickListener(object : OnItemClickListener {
+            newsAdapter.setOnItemClickListener(object : OnItemClickListener {
                 override fun onItemClick(view: View?, position: Int) {
                     val intent = Intent(this@NewsHomeActivity, NewsDetailActivity::class.java)
                     intent.putExtra("url", articles[position].url)
@@ -100,7 +101,7 @@ class NewsHomeActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
-                //startActivity(Intent(this, BookmarkActivity::class.java))
+                startActivity(Intent(this, SearchActivity::class.java))
             }
             R.id.action_favorite -> {
                 startActivity(Intent(this, BookmarkActivity::class.java))

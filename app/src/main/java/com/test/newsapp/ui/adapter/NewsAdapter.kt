@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.test.newsapp.data.model.Article
-import com.test.newsapp.ui.adapter.Adapter.MyViewHolder
+import com.test.newsapp.ui.adapter.NewsAdapter.MyViewHolder
 import com.test.newsapp.ui.main.NewsHomeActivity
 import com.test.newsapp.utils.Utils
 import com.test.pokemongo.R
 
-class Adapter(
+class NewsAdapter(
     articles: List<Article>,
     context: Context
 ) : RecyclerView.Adapter<MyViewHolder>() {

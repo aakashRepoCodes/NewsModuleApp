@@ -1,4 +1,4 @@
-package com.test.newsapp.ui.bookmark
+package com.test.newsapp.ui.search
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,20 +9,22 @@ import com.test.newsapp.MyApplication
 import com.test.newsapp.di.component.DaggerActivityComponent
 import com.test.newsapp.di.module.ActivityModule
 import com.test.newsapp.ui.base.BaseActivity
+import com.test.newsapp.ui.bookmark.BookmarkAdapter
 import com.test.newsapp.viewmodels.BookMarkArticleViewModel
+import com.test.newsapp.viewmodels.NewsViewModel
 import com.test.pokemongo.R
 import kotlinx.android.synthetic.main.activity_bookmark.*
 import javax.inject.Inject
 
 
-class BookmarkActivity : BaseActivity() {
+class SearchActivity : BaseActivity() {
 
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     private lateinit var adapter: BookmarkAdapter
 
     @Inject
-    lateinit var viewModel: BookMarkArticleViewModel
+    lateinit var viewModel: NewsViewModel
 
 
     override fun provideLayout(): Int = R.layout.activity_bookmark
@@ -36,7 +38,7 @@ class BookmarkActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDependencies()
-        viewModel.getBookMarkedArticles()
+        viewModel.readNewsFromDB()
         layoutManager = LinearLayoutManager(this)
         content.layoutManager = layoutManager
         supportActionBar?.title = getString(R.string.bookmark_toolbar_title)
@@ -53,7 +55,7 @@ class BookmarkActivity : BaseActivity() {
     }
 
     private fun observeLiveData() {
-        viewModel.bookmarkArticlesLiveData.observe(this , Observer {
+        viewModel.newsLocalLiveData.observe(this , Observer {
             adapter = BookmarkAdapter(it, this)
             content.adapter = adapter
             adapter.notifyDataSetChanged()

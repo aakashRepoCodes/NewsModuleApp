@@ -29,6 +29,9 @@ class NewsViewModel @Inject constructor(
     val newsFailedLiveData: LiveData<Boolean>
         get() = _newsFailedLiveData
 
+    private val _newsLocalLiveData = MutableLiveData<List<Article>>()
+    val newsLocalLiveData: LiveData<List<Article>>
+        get() = _newsLocalLiveData
 
 
      fun readNews() {
@@ -45,9 +48,23 @@ class NewsViewModel @Inject constructor(
         )
     }
 
+    fun readNewsFromDB() {
+        compositeDisposable.add(
+            databaseService.getArticleDao().getNewsArticles()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    _newsLocalLiveData.value = it
+                }, {
+                })
+        )
+    }
+
 
     private fun insertFetchedArticles(list: List<Article>) {
         for (i in list.indices) {
+            val id : Long = System.currentTimeMillis()
+            list[i].id = id
             insertItem(list[i])
         }
     }
@@ -67,7 +84,7 @@ class NewsViewModel @Inject constructor(
 
     fun bookMarkArticle(article: Article, isfav: Boolean) {
         compositeDisposable.add(
-            databaseService.getArticleDao().saveOrRemoveBookmarkArticle(isfav, article.title)
+            databaseService.getArticleDao().saveOrRemoveBookmarkArticle(isfav, article.id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({

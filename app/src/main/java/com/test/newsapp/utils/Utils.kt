@@ -61,17 +61,10 @@ object Utils {
         return newDate
     }
 
-    val country: String
+    private val country: String
         get() {
             val locale = Locale.getDefault()
             val country = locale.country.toString()
-            return country.toLowerCase()
-        }
-
-    val language: String
-        get() {
-            val locale = Locale.getDefault()
-            val country = locale.language.toString()
             return country.toLowerCase()
         }
 

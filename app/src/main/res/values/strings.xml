@@ -19,5 +19,6 @@
     <string name="server_connection_error">Not able to connect, please retry again</string>
     <string name="network_login_again">Please log in again</string>
     <string name="bookmark_toolbar_title">Bookmarks</string>
+    <string name="search">Search</string>
     R.string.
 </resources>

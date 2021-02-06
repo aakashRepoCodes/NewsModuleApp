@@ -1,6 +1,5 @@
 package com.test.newsapp.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.test.newsapp.data.model.Article
 import io.reactivex.Single
@@ -11,7 +10,7 @@ interface ArticleDao {
     fun insertNewsArticle(article: Article) : Single<Long>
 
     @Query("SELECT * FROM article")
-    fun getNewsArticles(): LiveData<List<Article>>
+    fun getNewsArticles(): Single<List<Article>>
 
     @Query("SELECT * FROM article WHERE bookmark =:value")
     fun getBookMarkedArticles(value : Boolean): Single<List<Article>>
@@ -19,8 +18,8 @@ interface ArticleDao {
     @Delete
     fun deleteNewsArticle(article: Article)
 
-    @Query("UPDATE article SET bookmark = :isArticleBookMarked WHERE title like :articleTitle")
-    fun saveOrRemoveBookmarkArticle(isArticleBookMarked: Boolean, articleTitle : String) : Single<Int>
+    @Query("UPDATE article SET bookmark = :isArticleBookMarked WHERE id =:articleTitle")
+    fun saveOrRemoveBookmarkArticle(isArticleBookMarked: Boolean, articleTitle : Long) : Single<Int>
 
     @Query("SELECT * FROM article WHERE title =:query")
     fun searchArticle(query : String) : Single<List<Article>>

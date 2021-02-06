@@ -5,6 +5,7 @@ import com.test.newsapp.di.ActivityScope
 import com.test.newsapp.di.module.ActivityModule
 import com.test.newsapp.ui.bookmark.BookmarkActivity
 import com.test.newsapp.ui.main.NewsHomeActivity
+import com.test.newsapp.ui.search.SearchActivity
 
 import dagger.Component
 
@@ -15,5 +16,8 @@ interface ActivityComponent {
     fun inject(activity: NewsHomeActivity)
 
     fun inject(activity: BookmarkActivity)
+
+    fun inject(activity: SearchActivity)
+
 
 }

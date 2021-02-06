@@ -1,4 +1,4 @@
-package com.test.pokemongo.ui.splash
+package com.test.newsapp.ui.splash
 
 import android.content.Intent
 import android.os.Bundle

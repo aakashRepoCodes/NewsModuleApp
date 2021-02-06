@@ -3,12 +3,20 @@ package com.test.newsapp.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import java.sql.Time
 
 @Entity(tableName = "article")
 data class Article(
 
+    @PrimaryKey
+    @SerializedName("none")
+    @Expose(serialize = false)
+    var id : Long = System.currentTimeMillis(),
+
     @ColumnInfo(name = "author")
-    val author: String,
+    val author: String?,
 
     @ColumnInfo(name = "content")
     val content: String,
@@ -19,12 +27,11 @@ data class Article(
     @ColumnInfo(name = "publishedAt")
     val publishedAt: String,
 
-    @PrimaryKey
     @ColumnInfo(name = "title")
     val title: String,
 
     @ColumnInfo(name = "url")
-    val url: String,
+    val url: String?,
 
     @ColumnInfo(name = "urlToImage")
     val urlToImage: String,
@@ -32,9 +39,4 @@ data class Article(
     @ColumnInfo(name = "bookmark")
     val isBookMarked: Boolean = false
 
-
-) {
-    constructor() : this(
-        "", "", "", "", "", "", ""
-    )
-}
+)

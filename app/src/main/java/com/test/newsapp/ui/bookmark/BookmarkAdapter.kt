@@ -45,7 +45,6 @@ class BookmarkAdapter(private val items: List<Article>, context :Context ) :
             newsChannel=  itemView.findViewById(R.id.news_channel)
             newsDesc=  itemView.findViewById(R.id.news_desc)
             newsTitle= itemView.findViewById(R.id.news_title)
-            newsImage= itemView.findViewById(R.id.news_image)
         }
 
         fun bindData(item: Article) {
