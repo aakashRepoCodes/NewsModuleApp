@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/ic_date"
+        android:contentDescription="dummy"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxLength="30"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/news_image"
+        app:layout_constraintTop_toTopOf="@id/news_image"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/news_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lines="4"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@id/news_title"
+        app:layout_constraintStart_toStartOf="@id/news_title"
+        app:layout_constraintTop_toBottomOf="@id/news_title"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/news_channel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chip_bg"
+        android:maxLength="10"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/news_image"
+        app:layout_constraintStart_toStartOf="@id/news_title"
+        app:layout_constraintTop_toBottomOf="@id/news_desc"
+        tools:text="NDTV" />
+
+    <ImageView
+        android:id="@+id/news_bookmark"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="fjksdbsdkjfbSDbfkjdsbsd"
+        android:src="@drawable/ic_bookmark"
+        app:layout_constraintBottom_toBottomOf="@id/news_image"
+        app:layout_constraintEnd_toEndOf="@id/news_desc"
+        app:tint="@android:color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
